@@ -1,0 +1,63 @@
+/* === Hero === */
+.hero-full {
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1.2s;
+}
+.hero-overlay {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  text-align: center;
+  padding: 3rem;
+  max-width: 900px;
+  color: #fff;
+}
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+.hero-overlay p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #f9f9f9;
+}
+.hero-full::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.25) 100%);
+  z-index: 0;
+}
+
+/* === Values Card (Assuming used in hero/feature area) === */
+.value-card {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.value-card h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.value-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f0f0f0;
+}
+.value-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}

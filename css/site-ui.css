@@ -1,0 +1,19 @@
+/* site-ui.css */
+.menu-toggle {
+  position: relative;
+  z-index: 3000;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* Prevent background scroll while mobile menu open */
+html.menu-open, body.menu-open {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Ensure active mobile nav shows properly */
+#mobile-nav.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
