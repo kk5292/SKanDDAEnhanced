@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cart | SKanDDA</title>
+
+<link rel="stylesheet" href="css/01_base.css">
+<link rel="stylesheet" href="css/02_layout.css">
+<link rel="stylesheet" href="css/03_hero.css">
+<link rel="stylesheet" href="css/04_products.css">
+<link rel="stylesheet" href="css/05_cart_checkout.css">
+<link rel="stylesheet" href="css/06_pages_responsive.css">
+
+<script src="js/cart.js" defer></script>
+
+<style>
+    /* === PAGE BACKGROUND === */
+    body {
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+        ),
+        url("assets/checkout-hero.png") center/cover no-repeat fixed;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #fff;
+    }
+
+    /* === HEADER === */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 60px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        box-shadow: none;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    header a,
+    nav a {
+        color: #fff !important;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+        color: #ff5b00 !important;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+
+    /* === DESKTOP NAVIGATION === */
+    #desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* ✅ Highlight the cart icon for this page */
+    .cart-icon-desktop[href="cart.html"] {
+        color: #ff5b00 !important;
+        font-weight: 600;
+    }
+
+    /* Hide mobile elements by default */
+    #mobile-nav,
+    .mobile-actions,
+    .menu-toggle {
+        display: none;
+    }
+
+    /* === CART PAGE LAYOUT === */
+    .cart-page-layout {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 20px;
+    }
+
+    .cart-page-layout h1 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .cart-page-layout .cart-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: #f0f0f0;
+    }
+
+    #cart-container {
+        width: 100%;
+        max-width: 900px;
+    }
+
+    /* === FOOTER FIX === */
+    footer {
+        margin-top: auto;
+        z-index: 50;
+        text-align: center;
+        padding: 20px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6); /* dark transparent background like other pages */
+    }
+
+    footer .social-footer {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 10px;
+        background: transparent; /* remove any inner white box */
+        padding: 0;
+    }
+
+    footer svg {
+        vertical-align: middle;
+    }
+
+    /* === MOBILE RESPONSIVENESS === */
+    @media (max-width: 900px) {
+        header { padding: 15px 15px; }
+        #desktop-nav { display: none !important; }
+        .mobile-actions {
+            display: flex !important;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+        .mobile-actions a { white-space: nowrap; }
+        .menu-toggle {
+            display: block !important;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px;
+        }
+        #mobile-nav {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            flex-direction: column;
+            padding: 15px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 90;
+        }
+        #mobile-nav.active { display: flex; }
+        #mobile-nav a {
+            padding: 12px 20px;
+            width: 100%;
+            display: block;
+            text-align: left;
+            font-size: 1.1em;
+            transition: background 0.2s;
+        }
+        #mobile-nav a:hover { background: rgba(255,255,255,0.1); }
+        #mobile-nav a[href="cart.html"] { color: #ff5b00 !important; font-weight: 600; }
+    }
+
+    @media (min-width: 901px) {
+        #mobile-nav { display: none !important; }
+        .mobile-actions { display: none; }
+        #desktop-nav { display: flex !important; }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo-link">
+        <div class="logo">
+            <img src="assets/logo.png" alt="SKanDDA Logo">
+        </div>
+    </a>
+    
+    <nav id="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="cart.html" class="cart-icon-desktop active">
+            🛒 (<span id="cart-count-desktop">0</span>)
+        </a>
+    </nav>
+
+    <div class="mobile-actions">
+        <a href="cart.html" class="cart-icon-desktop active">
+            🛒 (<span id="cart-count-desktop">0</span>)
+        </a>
+        
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 100 80" width="24" height="24" fill="currentColor">
+                <rect width="100" height="15" rx="8"></rect>
+                <rect y="30" width="100" height="15" rx="8"></rect>
+                <rect y="60" width="100" height="15" rx="8"></rect>
+            </svg>
+        </button>
+    </div>
+</header>
+
+<nav id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="cart.html" class="active">Cart</a>
+</nav>
+
+<main class="cart-page-layout">
+    <h1>Your Shopping Cart</h1>
+    <p class="cart-subtitle">
+        Review your selected items and proceed to checkout.
+    </p>
+    <div id="cart-container"></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="social-footer">
+      <a href="https://www.facebook.com/share/1CggjdtjkN/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6v1.9H19l-.5 3h-2v7A10 10 0 0 0 22 12z"/>
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/skandda.ae?igsh=YjEwMnVqMXJzNG01" target="_blank" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path d="M12 2.2c3.2 0 3.6.012 4.8.07 1.17.056 1.97.24 2.44.41a4.9 4.9 0 0 1 1.78 1.16 4.9 4.9 0 0 1 1.16 1.78c.17.47.35 1.27.41 2.44.058 1.18.07 1.6.07 4.8s-.012 3.6-.07 4.8c-.056 1.17-.24 1.97-.41 2.44a4.9 4.9 0 0 1-1.16 1.78 4.9 4.9 0 0 1-1.78 1.16c-.47.17-1.27.35-2.44.41-1.18.058-1.6.07-4.8.07s-3.6-.012-4.8-.07c-1.17-.056-1.97-.24-2.44-.41a4.9 4.9 0 0 1-1.78-1.16 4.9 4.9 0 0 1-1.16-1.78c-.17-.47-.35-1.27-.41-2.44C2.212 15.6 2.2 15.2 2.2 12s.012-3.6.07-4.8c.056-1.17.24-1.97.41-2.44a4.9 4.9 0 0 1 1.16-1.78 4.9 4.9 0 0 1 1.78-1.16c.47-.17 1.27-.35 2.44-.41C8.4 2.212 8.8 2.2 12 2.2z"/>
+          <circle cx="12" cy="12" r="3.2"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/971581268198" target="_blank" aria-label="WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.12.554 4.105 1.6 5.85L0 24l6.35-1.575A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.19-1.24-6.18-3.5-8.5z"/>
+        </svg>
+      </a>
+    </div>
+    <p>&copy; 2025 SKanDDa Worldwide LLC. All Rights Reserved.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+    const nav = document.getElementById('mobile-nav');
+    nav.classList.toggle('active');
+}
+document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
+</script>
+
+</body>
+</html>

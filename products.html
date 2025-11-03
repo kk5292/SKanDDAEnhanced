@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Products | SKanDDA</title>
+
+  <!-- Base site styles -->
+  <link rel="stylesheet" href="css/01_base.css" />
+  <link rel="stylesheet" href="css/02_layout.css" />
+  <link rel="stylesheet" href="css/03_hero.css" />
+  <link rel="stylesheet" href="css/04_products.css" />
+  <link rel="stylesheet" href="css/05_cart_checkout.css" />
+  <link rel="stylesheet" href="css/06_pages_responsive.css" />
+  <link rel="stylesheet" href="css/07_productsbase.css" />
+  <link rel="stylesheet" href="css/products-panel-fixes.css" />
+
+  <!-- Mobile menu helper styles -->
+  <link rel="stylesheet" href="css/site-ui.css" />
+
+  <script src="js/scroll-animations.js" defer></script>
+  <script src="js/products.js" defer></script>
+  <!-- Robust mobile menu behavior (handles toggle, outside click, Escape, scroll lock) -->
+  <script src="js/site-ui.js" defer></script>
+
+  <!-- Page-level inline styles (kept from original to ensure consistent UI) -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(6px);
+      height: 70px;
+    }
+
+    header a {
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    header a:hover,
+    header a.active {
+      color: #ff5b00 !important;
+    }
+
+    .logo img {
+      height: 55px;
+    }
+
+    #desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .mobile-actions {
+      display: none;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      color: #fff;
+      z-index: 1201;
+    }
+
+    .menu-toggle svg {
+      width: 26px;
+      height: 26px;
+      fill: #fff;
+      stroke: #fff;
+    }
+
+    #mobile-nav {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      flex-direction: column;
+      padding: 15px 0;
+      z-index: 1200;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: calc(100vh - 70px);
+      overflow-y: auto;
+      pointer-events: none;
+    }
+
+    #mobile-nav.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    #mobile-nav a {
+      padding: 12px 25px;
+      width: 100%;
+      display: block;
+      text-align: left;
+      font-size: 1.1em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .explorer-page {
+      padding-top: 85px !important;
+      min-height: calc(100vh - 85px);
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 30px 20px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .social-footer {
+      margin-bottom: 10px;
+    }
+
+    .social-footer a {
+      text-decoration: none;
+      border: none;
+      outline: none;
+      margin: 0 10px;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        padding: 15px 25px;
+      }
+      #desktop-nav {
+        display: none !important;
+      }
+      .mobile-actions {
+        display: flex !important;
+      }
+      .menu-toggle {
+        display: block !important;
+      }
+      .explorer-page {
+        padding-top: 75px !important;
+      }
+      #mobile-nav {
+        top: 65px;
+      }
+    }
+
+    @media (min-width: 901px) {
+      #desktop-nav {
+        display: flex !important;
+      }
+      .mobile-actions {
+        display: none !important;
+      }
+      #mobile-nav {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+        <img src="assets/logo.png" alt="SKanDDA Logo" />
+      </div>
+    </a>
+
+    <nav id="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="cart.html" class="cart-icon-desktop">🛒 (<span id="cart-count-desktop">0</span>)</a>
+    </nav>
+
+    <div class="mobile-actions">
+      <a href="cart.html" class="cart-icon-desktop">🛒 (<span id="cart-count-mobile">0</span>)</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu" aria-controls="mobile-nav" aria-expanded="false">
+        <svg viewBox="0 0 100 80" aria-hidden="true" focusable="false">
+          <rect width="100" height="15" rx="8"></rect>
+          <rect y="30" width="100" height="15" rx="8"></rect>
+          <rect y="60" width="100" height="15" rx="8"></rect>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav id="mobile-nav" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="cart.html" class="cart-icon-mobile">🛒 Cart (<span id="cart-count-mobile-menu">0</span>)</a>
+  </nav>
+
+  <main id="explorer-page" class="explorer-page" role="main">
+    <aside id="category-panel" aria-label="Categories">
+      <h2>Product Category</h2>
+      <ul id="category-list"></ul>
+
+      <div class="filters-container">
+        <div id="filters-content" class="filters-content">
+          <div id="filter-info" class="filter-block">
+            <p style="font-size:0.85em;color:#aaa;margin:4px 0;">
+              Use filters to narrow down items or sort products easily.
+            </p>
+          </div>
+
+          <div class="filter-block">
+            <label>Search</label>
+            <input id="filter-tag" type="text" placeholder="Search by product name" />
+          </div>
+          <div class="filter-block">
+            <label>Price ≤ AED</label>
+            <input id="filter-price" type="number" min="0" placeholder="Max price" />
+          </div>
+
+          <div class="filter-block">
+            <button id="apply-filters" class="small-btn">Apply</button>
+            <button id="reset-filters" class="small-btn outline">Reset</button>
+          </div>
+        </div>
+
+        <div id="sort-content" class="filters-content hidden">
+          <div class="filter-block">
+            <label>Sort by</label>
+            <select id="sort-select">
+              <option value="">Default</option>
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+              <option value="new">New</option>
+              <option value="trending">Trending</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section id="product-panel" aria-live="polite">
+      <div id="breadcrumb" class="breadcrumb" aria-hidden="true"></div>
+      <div id="product-container"><!-- Populated dynamically by JS --></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-footer">
+      <a href="https://www.facebook.com/share/1CggjdtjkN/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6v1.9H19l-.5 3h-2v7A10 10 0 0 0 22 12z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/skandda.ae?igsh=YjEwMnVqMXJzNG01" target="_blank" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.2c3.2 0 3.6.012 4.8.07 1.17.056 1.97.24 2.44.41a4.9 4.9 0 0 1 1.78 1.16 4.9 4.9 0 0 1 1.16 1.78c.17.47.35 1.27.41 2.44.058 1.18.07 1.6.07 4.8s-.012 3.6-.07 4.8c-.056 1.17-.24 1.97-.41 2.44a4.9 4.9 0 0 1-1.16 1.78 4.9 4.9 0 0 1-1.78 1.16c-.47.17-1.27.35-2.44.41-1.18.058-1.6.07-4.8.07s-3.6-.012-4.8-.07c-1.17-.056-1.97-.24-2.44-.41a4.9 4.9 0 0 1-1.78-1.16 4.9 4.9 0 0 1-1.16-1.78c-.17-.47-.35-1.27-.41-2.44C2.212 15.6 2.2 15.2 2.2 12s.012-3.6.07-4.8c.056-1.17.24-1.97.41-2.44a4.9 4.9 0 0 1 1.16-1.78 4.9 4.9 0 0 1 1.78-1.16c.47-.17 1.27-.35 2.44-.41C8.4 2.212 8.8 2.2 12 2.2z"/><circle cx="12" cy="12" r="3.2"/></svg>
+      </a>
+      <a href="https://wa.me/971581268198" target="_blank" aria-label="WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.12.554 4.105 1.6 5.85L0 24l6.35-1.575A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.19-1.24-6.18-3.5-8.5z"/></svg>
+      </a>
+    </div>
+    <p>&copy; 2025 SKanDDa Worldwide LLC. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Keep cart count updater locally (no menu handling here — site-ui.js manages mobile toggle)
+    document.addEventListener("DOMContentLoaded", function () {
+      try {
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalQty = cartItems.reduce((a, b) => a + (b.quantity || 0), 0);
+        document.querySelectorAll("#cart-count-desktop, #cart-count-mobile, #cart-count-mobile-menu").forEach(
+          (el) => { if (el) el.textContent = totalQty; }
+        );
+      } catch (e) {
+        console.warn("Cart count update failed:", e);
+      }
+    });
+  </script>
+</body>
+</html>

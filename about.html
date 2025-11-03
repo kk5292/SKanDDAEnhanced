@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | SKanDDA</title>
+
+<link rel="stylesheet" href="css/01_base.css">
+<link rel="stylesheet" href="css/02_layout.css">
+<link rel="stylesheet" href="css/03_hero.css">
+<link rel="stylesheet" href="css/04_products.css">
+<link rel="stylesheet" href="css/05_cart_checkout.css">
+<link rel="stylesheet" href="css/06_pages_responsive.css">
+
+<style>
+/* --- GLOBAL --- */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: #000;
+}
+
+/* --- HEADER --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(5px);
+}
+
+header a,
+nav a {
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+header a:hover,
+header a.active {
+    color: #ff5b00 !important;
+}
+
+.logo img {
+    height: 55px;
+}
+
+/* --- DESKTOP NAV --- */
+#desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* --- MOBILE ACTIONS --- */
+.mobile-actions {
+    /* Initially hidden on desktop */
+    display: none; 
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-toggle {
+    /* Initially hidden on desktop */
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* --- MOBILE NAV (The Off-Canvas Menu) --- */
+#mobile-nav {
+    /* Hidden by default on all screens and controlled by JS/media queries */
+    display: none; 
+    position: absolute;
+    top: 85px; /* Adjust based on header height (55px logo + padding) */
+    right: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.95);
+    flex-direction: column;
+    padding: 15px 0;
+    z-index: 90;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+#mobile-nav.active {
+    display: flex;
+}
+#mobile-nav a {
+    padding: 12px 20px;
+    width: 100%;
+    display: block;
+    text-align: left;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+#mobile-nav a:hover {
+    background: rgba(255, 91, 0, 0.1); /* Light hover effect */
+}
+
+
+/* --- HERO SECTION --- */
+.hero-full {
+    position: relative;
+    background: url('assets/about-hero.png') center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 160px 20px 120px;
+    overflow: hidden;
+}
+
+/* Soft dark overlay */
+.hero-full::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 0;
+}
+
+.hero-full > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-full h1 {
+    font-size: 2.7rem;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.hero-full p {
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* --- VALUES SECTION --- */
+.values-section {
+    background: #000;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.values-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #ff5b00;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+}
+
+.value-card h3 {
+    color: #ff5b00;
+    margin-bottom: 10px;
+}
+
+/* --- FOOTER --- */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 25px 20px;
+    color: #fff;
+    background: rgba(0,0,0,0.25);
+}
+
+.social-footer {
+    margin-bottom: 10px;
+}
+
+.social-footer a {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    margin: 0 10px;
+}
+
+/* ----------------------------- */
+/* --- RESPONSIVE FIXES --- */
+/* ----------------------------- */
+
+/* Phones/Small Tablets (900px and below) */
+@media (max-width: 900px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    /* HIDE Desktop Nav */
+    #desktop-nav {
+        display: none !important;
+    }
+    
+    /* SHOW Mobile Actions (Cart + Toggle) */
+    .mobile-actions {
+        display: flex !important;
+        margin-left: auto;
+    }
+    
+    /* SHOW Hamburger Toggle */
+    .menu-toggle {
+        display: block !important;
+    }
+}
+
+/* Phone-specific adjustments (600px and below) */
+@media (max-width: 600px) {
+    /* Ensure the mobile nav is initially hidden, only active when clicked */
+    #mobile-nav {
+        top: 80px; /* Adjust top position for smaller screens if needed */
+        position: fixed; /* Use fixed positioning for better mobile overlay experience */
+        height: 100vh; /* Optional: Make it full height for a better overlay */
+        background: rgba(0,0,0,0.9);
+    }
+    
+    /* Remove padding/margin from header for tighter layout */
+    header {
+        padding: 10px 15px;
+    }
+
+    .logo img {
+        height: 45px;
+    }
+    
+    .hero-full h1 {
+        font-size: 2rem;
+    }
+    .hero-full p {
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo-link">
+        <div class="logo"><img src="assets/logo.png" alt="SKanDDA Logo" /></div>
+    </a>
+
+    <nav id="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html" class="active">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="cart.html" class="cart-icon-desktop">🛒 (<span id="cart-count-desktop">0</span>)</a>
+    </nav>
+
+    <div class="mobile-actions">
+        <a href="cart.html" class="cart-icon-mobile">🛒 (<span id="cart-count-mobile">0</span>)</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">☰</button>
+    </div>
+</header>
+
+<nav id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="about.html" class="active">About Us</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<section class="hero-full">
+    <h1>✨ About SKanDDA ✨</h1>
+    <p>
+        SKanDDA is a women-driven brand born from passion and creativity, dedicated to our vibrant Indian community in UAE.
+        We craft authentic, premium-quality snacks, fashion, and return gifts that bring joy, celebrate tradition, and make
+        every home feel special. Every product carries a piece of our heart. 💕
+    </p>
+</section>
+
+<section class="values-section">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+        <div class="value-card">
+            <h3>Trust & Transparency</h3>
+            <p>We believe in honest communication and strong relationships built on trust with our partners and customers.</p>
+        </div>
+        <div class="value-card">
+            <h3>Quality First</h3>
+            <p>Every product we offer reflects our commitment to exceptional quality and sustainability.</p>
+        </div>
+        <div class="value-card">
+            <h3>Community</h3>
+            <p>Supporting local artisans and connecting cultures is at the heart of SKanDDA.</p>
+            <p>
+                </p>
+        </div>
+    </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="social-footer">
+      <a href="https://www.facebook.com/share/1CggjdtjkN/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path
+            d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6v1.9H19l-.5 3h-2v7A10 10 0 0 0 22 12z"
+          />
+        </svg>
+      </a>
+      <a href="https://www.instagram.com/skandda.ae?igsh=YjEwMnVqMXJzNG01" target="_blank" aria-label="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path
+            d="M12 2.2c3.2 0 3.6.012 4.8.07 1.17.056 1.97.24 2.44.41a4.9 4.9 0 0 1 1.78 1.16 4.9 4.9 0 0 1 1.16 1.78c.17.47.35 1.27.41 2.44.058 1.18.07 1.6.07 4.8s-.012 3.6-.07 4.8c-.056 1.17-.24 1.97-.41 2.44a4.9 4.9 0 0 1-1.16 1.78 4.9 4.9 0 0 1-1.78 1.16c-.47.17-1.27.35-2.44.41-1.18.058-1.6.07-4.8.07s-3.6-.012-4.8-.07c-1.17-.056-1.97-.24-2.44-.41a4.9 4.9 0 0 1-1.78-1.16 4.9 4.9 0 0 1-1.16-1.78c-.17-.47-.35-1.27-.41-2.44C2.212 15.6 2.2 15.2 2.2 12s.012-3.6.07-4.8c.056-1.17.24-1.97.41-2.44a4.9 4.9 0 0 1 1.16-1.78 4.9 4.9 0 0 1 1.78-1.16c.47-.17 1.27-.35 2.44-.41C8.4 2.212 8.8 2.2 12 2.2z"
+          />
+          <circle cx="12" cy="12" r="3.2" />
+        </svg>
+      </a>
+      <a href="https://wa.me/971581268198" target="_blank" aria-label="WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff">
+          <path
+            d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.12.554 4.105 1.6 5.85L0 24l6.35-1.575A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.19-1.24-6.18-3.5-8.5z"
+          />
+        </svg>
+      </a>
+    </div>
+    <p>&copy; 2025 SKanDDa Worldwide LLC. All Rights Reserved.</p>
+  </footer>
+
+<script>
+// NOTE: This logic should ideally be consolidated into a single 'cart.js' or 'main.js' file 
+// and the element IDs should be consistent across all pages.
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to update the cart count across all visible counter elements
+    function updateCartCounts() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const totalQty = cart.reduce((a, b) => a + (b.quantity || 0), 0);
+        
+        // Update Desktop Cart Count
+        document.querySelectorAll('#cart-count-desktop').forEach(el => el.textContent = totalQty);
+        
+        // Update Mobile Cart Count (New ID added in HTML for better control)
+        document.querySelectorAll('#cart-count-mobile').forEach(el => el.textContent = totalQty);
+    }
+    
+    // Set initial cart count on load
+    updateCartCounts();
+
+    // Mobile menu toggle logic
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    
+    // Ensure both elements exist before adding listeners
+    if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            // Optional: Change the hamburger icon to an 'X' when active
+            toggle.textContent = nav.classList.contains('active') ? '✕' : '☰'; 
+        });
+    }
+    
+    // Optional: Close menu when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            toggle.textContent = '☰';
+        });
+    });
+});
+</script>
+
+</body>
+</html>
